@@ -3046,6 +3046,41 @@ window.addEventListener('load', () => {
 document.getElementById('year').textContent = new Date().getFullYear();
 fetchProjects();
 lucide.createIcons();
+
+
+    // ========================================
+// EXPOSE FUNCTIONS TO GLOBAL (for onclick)
+// ========================================
+
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.closeModalOnOverlay = closeModalOnOverlay;
+window.navigateProject = navigateProject;
+window.toggleSidePanel = toggleSidePanel;
+window.closeSidePanel = closeSidePanel;
+window.openShareModal = openShareModal;
+window.closeShareModal = closeShareModal;
+window.openAnalyticsModal = openAnalyticsModal;
+window.closeAnalyticsModal = closeAnalyticsModal;
+window.openEnquiryModal = openEnquiryModal;
+window.closeEnquiryModal = closeEnquiryModal;
+window.submitEnquiry = submitEnquiry;
+window.handleLike = handleLike;
+window.handleModalLike = handleModalLike;
+window.changePage = changePage;
+window.applyFilters = applyFilters;
+window.clearFilters = clearFilters;
+window.previousSlide = previousSlide;
+window.nextSlide = nextSlide;
+window.goToSlide = goToSlide;
+window.toggleMobileMenu = toggleMobileMenu;
+window.closeMobileMenu = closeMobileMenu;
+window.scrollToTop = scrollToTop;
+window.submitFeedback = submitFeedback;
+window.copyProjectLink = copyProjectLink;
+window.shareToLinkedIn = shareToLinkedIn;
+window.shareToTwitter = shareToTwitter;
+
 </script>
 
 </body>
