@@ -1,1 +1,3052 @@
-<p>this is it</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works | Packdez - Google Sheets Automation Systems</title>
+    <meta name="description" content="Automation systems built for real operational teams. See how Packdez designs custom Google Sheets workflows that remove manual work and scale with your business.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --background: 0 0% 100%;
+            --foreground: 220 20% 10%;
+            --primary: 146 55% 36%;
+            --primary-foreground: 0 0% 100%;
+            --muted: 220 14% 96%;
+            --muted-foreground: 220 9% 46%;
+            --border: 220 13% 91%;
+            --destructive: 0 84% 60%;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            scroll-behavior: smooth;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .bg-primary { background-color: hsl(146 55% 36%); }
+        .text-primary { color: hsl(146 55% 36%); }
+        .border-primary { border-color: hsl(146 55% 36%); }
+        .bg-muted { background-color: hsl(220 14% 96%); }
+        .text-muted-foreground { color: hsl(220 9% 46%); }
+        .border-border { border-color: hsl(220 13% 91%); }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background-color: hsl(146 55% 36%);
+            color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:hover {
+            background-color: hsl(146 55% 32%);
+            box-shadow: 0 4px 12px rgba(46, 140, 78, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .nav-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid hsl(220 13% 91%);
+        }
+
+        /* Hero Slider */
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 1rem;
+            background: white;
+            border: 1px solid hsl(220 13% 91%);
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slider-slide {
+            min-width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            padding: 3rem;
+            align-items: center;
+        }
+
+        .slider-creator-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .slider-creator-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid hsl(220 13% 91%);
+        }
+
+        .slider-creator-details {
+            flex: 1;
+        }
+
+        .slider-creator-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: hsl(220 20% 10%);
+        }
+
+        .slider-engagement-stats {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: hsl(220 9% 46%);
+        }
+
+        .slider-engagement-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        @media (max-width: 968px) {
+            .slider-slide {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
+            }
+        }
+
+        .slider-image {
+            width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.75rem;
+            z-index: 10;
+        }
+
+        .slider-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: white;
+            border: 1px solid hsl(220 13% 91%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .slider-btn:hover {
+            background: hsl(146 55% 36%);
+            border-color: hsl(146 55% 36%);
+            color: white;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .slider-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            background: hsl(220 13% 91%);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .slider-dot.active {
+            background: hsl(146 55% 36%);
+            width: 1.5rem;
+            border-radius: 0.25rem;
+        }
+
+        /* Filters */
+        .filters-section {
+            background: white;
+            border: 1px solid hsl(220 13% 91%);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-input {
+            padding: 0.75rem 1rem;
+            border: 1px solid hsl(220 13% 91%);
+            border-radius: 0.5rem;
+            font-size: 0.9375rem;
+            width: 100%;
+            transition: border-color 0.2s;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: hsl(146 55% 36%);
+        }
+
+        .filter-select {
+            padding: 0.75rem 1rem;
+            border: 1px solid hsl(220 13% 91%);
+            border-radius: 0.5rem;
+            font-size: 0.9375rem;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: hsl(146 55% 36%);
+        }
+
+        /* Project Grid - Dribbble Style */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Dribbble-style Card */
+        .project-card {
+            background: transparent;
+            border-radius: 0.75rem;
+            overflow: visible;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .project-card-image-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            background: hsl(220 14% 96%);
+            margin-bottom: 0.75rem;
+        }
+
+        .project-card:hover .project-card-image-wrapper {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .project-card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-card-image {
+            transform: scale(1.04);
+        }
+
+        /* Overlay on hover */
+        .project-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 40%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1rem;
+        }
+
+        @media (min-width: 769px) {
+            .project-card:hover .project-card-overlay {
+                opacity: 1;
+            }
+        }
+
+        .overlay-top {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+
+        .overlay-action {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 0.375rem;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .overlay-action:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .overlay-bottom {
+            color: white;
+        }
+
+        .overlay-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .overlay-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .overlay-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Card Footer - Dribbble Style */
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-creator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .creator-avatar {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid hsl(220 13% 91%);
+        }
+
+        .creator-name {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: hsl(220 20% 10%);
+        }
+
+        .card-stats {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 0.75rem;
+            color: hsl(220 9% 46%);
+        }
+
+        .card-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .card-stat svg {
+            width: 0.875rem;
+            height: 0.875rem;
+        }
+
+        /* Like Button with Animation */
+        .like-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: all 0.2s;
+        }
+
+        .like-btn:hover {
+            color: hsl(0 84% 60%);
+        }
+
+        .like-btn.liked {
+            color: hsl(310 77% 65%);
+        }
+
+        .like-btn.liked svg {
+            fill: currentColor;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.3); }
+            50% { transform: scale(1.1); }
+        }
+
+        .like-btn.animating svg {
+            animation: heartBeat 0.4s ease;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: hsl(146 55% 36%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(46, 140, 78, 0.3);
+            z-index: 40;
+            opacity: 0;
+            transform: translateY(100px);
+            pointer-events: none;
+            border: none;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .scroll-to-top:hover {
+            background: hsl(146 55% 32%);
+            box-shadow: 0 6px 16px rgba(46, 140, 78, 0.4);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .scroll-to-top {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+        }
+
+        /* Enhanced Modal - Dribbble Style with 2 Columns */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 40px;
+            overflow: hidden;
+            transition: grid-template-columns 0.3s ease;
+        }
+
+        .modal-content.side-expanded {
+            grid-template-columns: 1fr 380px;
+        }
+
+        @media (max-width: 968px) {
+            .modal-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Main Content Column */
+        .modal-main-column {
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* Fixed Header */
+        .modal-header-fixed {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 1px solid hsl(220 13% 91%);
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 20;
+            gap: 1rem;
+        }
+
+        .modal-header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .modal-contractor-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid hsl(220 13% 91%);
+            flex-shrink: 0;
+        }
+
+        .modal-title-text {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: hsl(220 20% 10%);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+        }
+
+        .modal-engagement-stats {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-left: 1rem;
+            flex-shrink: 0;
+        }
+
+        .modal-engagement-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.875rem;
+            color: hsl(220 9% 46%);
+        }
+
+        .modal-like-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.875rem;
+            color: hsl(220 9% 46%);
+            transition: all 0.2s;
+            padding: 0;
+        }
+
+        .modal-like-btn:hover {
+            color: hsl(310 77% 65%);
+        }
+
+        .modal-like-btn.liked {
+            color: hsl(310 77% 65%);
+        }
+
+        .modal-like-btn.liked svg {
+            fill: currentColor;
+        }
+
+        @media (max-width: 768px) {
+            .modal-title-text {
+                font-size: 1rem;
+            }
+            .modal-engagement-stats {
+                display: none;
+            }
+        }
+
+        .modal-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .modal-nav-icon-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background: hsl(220 14% 96%);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .modal-nav-icon-btn:hover:not(:disabled) {
+            background: hsl(146 55% 36%);
+            color: white;
+        }
+
+        .modal-nav-icon-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .modal-enquiry-btn {
+            padding: 0.625rem 1.25rem;
+            background: hsl(146 55% 36%);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .modal-enquiry-btn:hover {
+            background: hsl(146 55% 32%);
+            box-shadow: 0 4px 12px rgba(46, 140, 78, 0.3);
+        }
+
+        /* Modal Body */
+        .modal-body-content {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .modal-body-content {
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        /* Featured Media Section with Vertical Gallery */
+        .featured-media-section {
+            margin-bottom: 2.5rem;
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .featured-media-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .media-thumbnails-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .media-thumbnails-vertical {
+                flex-direction: row;
+                overflow-x: auto;
+            }
+        }
+
+        .featured-media-container {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            background: hsl(220 14% 96%);
+            position: relative;
+        }
+
+        .featured-media-container img,
+        .featured-media-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-media-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .media-thumbnail {
+            aspect-ratio: 4 / 3;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            background: hsl(220 14% 96%);
+            flex-shrink: 0;
+        }
+
+        .media-thumbnail:hover {
+            border-color: hsl(146 55% 36%);
+            transform: scale(1.05);
+        }
+
+        .media-thumbnail.active {
+            border-color: hsl(146 55% 36%);
+        }
+
+        .media-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Project Details Grid */
+        .project-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background: hsl(220 14% 98%);
+            border-radius: 0.75rem;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: hsl(220 9% 46%);
+        }
+
+        .detail-value {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: hsl(220 20% 10%);
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: hsl(220 20% 10%);
+        }
+
+        .section-content {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: hsl(220 9% 46%);
+        }
+
+        /* Contractor Section */
+        .contractor-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .contractor-divider::before,
+        .contractor-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: hsl(220 13% 91%);
+        }
+
+        .contractor-avatar-large {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 0 1.5rem;
+        }
+
+        .contractor-info-box {
+            background: hsl(220 14% 98%);
+            border: 1px solid hsl(220 13% 91%);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .contractor-name-large {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: hsl(220 20% 10%);
+        }
+
+        .contractor-bio {
+            font-size: 1rem;
+            color: hsl(220 9% 46%);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Related Projects */
+        .related-projects-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .view-all-link {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: hsl(146 55% 36%);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .view-all-link:hover {
+            color: hsl(146 55% 32%);
+            text-decoration: underline;
+        }
+
+        .related-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 968px) {
+            .related-projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .related-projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .related-project-card {
+            cursor: pointer;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .related-project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .related-project-image {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            background: hsl(220 14% 96%);
+            border-radius: 0.5rem;
+        }
+
+        .related-project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .related-project-card:hover .related-project-overlay {
+            opacity: 1;
+        }
+
+        .related-project-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .related-project-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: white;
+        }
+
+        .related-project-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Side Column - Collapsible */
+        .modal-side-column {
+            background: hsl(220 14% 98%);
+            border-left: 1px solid hsl(220 13% 91%);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 968px) {
+            .modal-side-column {
+                display: none;
+            }
+        }
+
+        .side-column-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 2.5rem 0 1rem 0;
+            align-items: center;
+        }
+
+        .side-icon-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid hsl(220 13% 91%);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .side-icon-btn:hover {
+            background: hsl(146 55% 36%);
+            border-color: hsl(146 55% 36%);
+            color: white;
+        }
+
+        .side-icon-btn.active {
+            background: hsl(146 55% 36%);
+            border-color: hsl(146 55% 36%);
+            color: white;
+        }
+
+        .side-icon-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: hsl(146 55% 36%);
+            color: white;
+            font-size: 0.625rem;
+            font-weight: 700;
+            padding: 0.125rem 0.375rem;
+            border-radius: 9999px;
+            min-width: 1.25rem;
+            text-align: center;
+        }
+
+        /* Side Panel Content */
+        .side-panel-content {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .side-panel-content.active {
+            display: flex;
+        }
+
+        .side-panel-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid hsl(220 13% 91%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+        }
+
+        .side-panel-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .side-panel-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            background: white;
+        }
+
+        /* Comments/Feedback Section */
+        .comment-item {
+            padding: 1rem;
+            background: hsl(220 14% 98%);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .comment-text {
+            font-size: 0.875rem;
+            color: hsl(220 9% 46%);
+            line-height: 1.5;
+        }
+
+        .comment-form {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid hsl(220 13% 91%);
+        }
+
+        .comment-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid hsl(220 13% 91%);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+        }
+
+        .comment-textarea:focus {
+            outline: none;
+            border-color: hsl(146 55% 36%);
+        }
+
+        .comment-submit-btn {
+            margin-top: 0.75rem;
+            padding: 0.625rem 1.25rem;
+            background: hsl(146 55% 36%);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .comment-submit-btn:hover {
+            background: hsl(146 55% 32%);
+        }
+
+        /* Share & Analytics Modals - Centered */
+        .center-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 120;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .center-modal-overlay.active {
+            display: flex;
+        }
+
+        .center-modal-content {
+            background: white;
+            border-radius: 1rem;
+            max-width: 500px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .center-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .center-modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .center-modal-close {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: hsl(220 14% 96%);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .center-modal-close:hover {
+            background: hsl(220 13% 91%);
+        }
+
+        /* Share Options */
+        .share-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            background: hsl(220 14% 98%);
+            border: 1px solid hsl(220 13% 91%);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .share-btn:hover {
+            background: hsl(146 55% 36%);
+            border-color: hsl(146 55% 36%);
+            color: white;
+        }
+
+        .share-link-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid hsl(220 13% 91%);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            background: white;
+        }
+
+        /* Analytics Section */
+        .analytics-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .analytics-item {
+            background: hsl(220 14% 98%);
+            border: 1px solid hsl(220 13% 91%);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .analytics-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: hsl(146 55% 36%);
+            margin-bottom: 0.5rem;
+        }
+
+        .analytics-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: hsl(220 9% 46%);
+        }
+
+        /* Enquiry Modal */
+        .enquiry-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 110;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .enquiry-modal-overlay.active {
+            display: flex;
+        }
+
+        .enquiry-modal-content {
+            background: white;
+            border-radius: 1rem;
+            max-width: 500px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .enquiry-modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .enquiry-form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .enquiry-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .enquiry-input,
+        .enquiry-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid hsl(220 13% 91%);
+            border-radius: 0.5rem;
+            font-size: 0.9375rem;
+            font-family: inherit;
+        }
+
+        .enquiry-input:focus,
+        .enquiry-textarea:focus {
+            outline: none;
+            border-color: hsl(146 55% 36%);
+        }
+
+        .enquiry-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .enquiry-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .enquiry-cancel-btn {
+            flex: 1;
+            padding: 0.75rem;
+            background: white;
+            border: 1px solid hsl(220 13% 91%);
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .enquiry-submit-btn {
+            flex: 1;
+            padding: 0.75rem;
+            background: hsl(146 55% 36%);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .enquiry-submit-btn:hover {
+            background: hsl(146 55% 32%);
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(6px);
+            z-index: 90;
+            display: none;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+        }
+
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 85%;
+            max-width: 320px;
+            background: white;
+            z-index: 100;
+            padding: 24px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-sidebar.active {
+            transform: translateX(0);
+        }
+
+        .mobile-sidebar a {
+            padding: 14px 0;
+            font-size: 16px;
+            font-weight: 600;
+            border-bottom: 1px solid hsl(var(--border));
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-padding {
+            padding: 5rem 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 3rem 1rem;
+            }
+            .desktop-only {
+                display: none !important;
+            }
+        }
+
+        .tool-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tool-tag {
+            padding: 0.375rem 0.75rem;
+            background: white;
+            border: 1px solid hsl(220 13% 91%);
+            border-radius: 0.375rem;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: hsl(220 20% 10%);
+        }
+
+        .outcome-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .outcome-metric {
+            background: hsl(220 14% 98%);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+
+        .outcome-metric-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: hsl(146 55% 36%);
+            margin-bottom: 0.5rem;
+        }
+
+        .outcome-metric-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: hsl(220 9% 46%);
+        }
+
+        .testimonial-box {
+            background: hsl(220 14% 98%);
+            border-left: 4px solid hsl(146 55% 36%);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+
+        .pagination-btn {
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 1px solid hsl(220 13% 91%);
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pagination-btn:hover:not(:disabled) {
+            background: hsl(146 55% 36%);
+            border-color: hsl(146 55% 36%);
+            color: white;
+        }
+
+        .pagination-btn.active {
+            background: hsl(146 55% 36%);
+            border-color: hsl(146 55% 36%);
+            color: white;
+        }
+
+        .pagination-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .loading-spinner {
+            width: 3rem;
+            height: 3rem;
+            border: 3px solid hsl(220 13% 91%);
+            border-top-color: hsl(146 55% 36%);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: hsl(220 9% 46%);
+        }
+    </style>
+</head>
+<body>
+    
+<!-- Mobile overlay -->
+<div id="mobile-overlay" class="mobile-overlay" onclick="closeMobileMenu()"></div>
+
+<!-- Mobile sidebar -->
+<aside id="mobile-menu" class="mobile-sidebar">
+  <div class="flex items-center justify-between mb-6">
+    <a href="https://packdez.com" class="flex items-center gap-2" onclick="closeMobileMenu()">
+      <img src="https://packdez.com/assets/logo/packdez-logo-512x512.png" alt="Packdez logo" class="h-8 w-8" />
+      <span class="text-xl font-bold">Packdez</span>
+    </a>
+    <button onclick="closeMobileMenu()" aria-label="Close menu" class="text-2xl font-bold">×</button>
+  </div>
+  <a href="https://packdez.com#work" onclick="closeMobileMenu()">Work</a>
+  <a href="https://packdez.com#pricing" onclick="closeMobileMenu()">Pricing</a>
+  <a href="https://packdez.com#reviews" onclick="closeMobileMenu()">Reviews</a>
+  <a href="about.html" onclick="closeMobileMenu()">About</a>
+  <a href="https://packdez.com#audit" onclick="closeMobileMenu()" class="mt-6 btn btn-primary">
+    Get Automation Plan
+  </a>
+</aside>
+
+<!-- Navigation -->
+<nav class="nav-fixed">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <a href="https://packdez.com" class="flex items-center gap-2 md:-ml-12">
+        <img src="https://packdez.com/assets/logo/packdez-logo-512x512.png" alt="Packdez logo" class="h-8 w-8" />
+        <span class="text-xl font-bold">Packdez</span>
+      </a>
+      
+      <div class="desktop-only flex items-center gap-6" style="margin-right:-90px;">
+        <a href="https://packdez.com#work" class="text-sm font-medium text-primary">Work</a>
+        <a href="https://packdez.com#pricing" class="text-sm font-medium text-muted-foreground hover:text-primary">Pricing</a>
+        <a href="https://packdez.com#reviews" class="text-sm font-medium text-muted-foreground hover:text-primary">Reviews</a>
+        <a href="about.html" class="text-sm font-medium text-muted-foreground hover:text-primary">About</a>
+        <a href="https://packdez.com#audit" class="btn btn-primary ml-auto mr-10" style="padding: 0.5rem 1.25rem;">Get Free Audit</a>
+      </div>
+      <button class="flex md:hidden" onclick="toggleMobileMenu()" aria-label="Open menu">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Scroll to Top Button -->
+<button id="scroll-to-top" class="scroll-to-top" onclick="scrollToTop()" aria-label="Scroll to top">
+  <i data-lucide="chevron-up" style="width: 1.25rem; height: 1.25rem;"></i>
+</button>
+
+<!-- Hero Section with Featured Slider -->
+<section class="section-padding" style="padding-top: 8rem; padding-bottom: 4rem;">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-8 fade-up">
+      <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight tracking-[-0.02em]">
+        Systems built for operational teams
+      </h1>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        Custom Google Sheets automation that removes manual work, connects your tools, and scales with your business.
+      </p>
+    </div>
+
+    <!-- Featured Projects Slider -->
+    <div id="featured-slider" class="hero-slider fade-up" style="display: none;">
+      <div class="slider-track" id="slider-track"></div>
+      <div class="slider-controls">
+        <button class="slider-btn" onclick="previousSlide()" aria-label="Previous">
+          <i data-lucide="chevron-left" style="width: 1.25rem; height: 1.25rem;"></i>
+        </button>
+        <button class="slider-btn" onclick="nextSlide()" aria-label="Next">
+          <i data-lucide="chevron-right" style="width: 1.25rem; height: 1.25rem;"></i>
+        </button>
+      </div>
+      <div class="slider-dots" id="slider-dots"></div>
+    </div>
+
+    <!-- Loading state for slider -->
+    <div id="slider-loading" class="loading-state">
+      <div class="loading-spinner"></div>
+      <p class="text-muted-foreground">Loading featured systems...</p>
+    </div>
+  </div>
+</section>
+
+<!-- Filters Section -->
+<section id="filters-section" style="background: hsl(220 14% 98%); padding: 3rem 0;">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="filters-section fade-up">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: end;">
+        <div>
+          <label for="search-input" style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">Search</label>
+          <input 
+            type="text" 
+            id="search-input" 
+            class="filter-input" 
+            placeholder="Search projects..."
+            onkeyup="applyFilters()"
+          />
+        </div>
+        <div>
+          <label for="category-filter" style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">Category</label>
+          <select id="category-filter" class="filter-select" onchange="applyFilters()">
+            <option value="">All categories</option>
+          </select>
+        </div>
+        <div>
+          <label for="industry-filter" style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">Industry</label>
+          <select id="industry-filter" class="filter-select" onchange="applyFilters()">
+            <option value="">All industries</option>
+          </select>
+        </div>
+        <div>
+          <button onclick="clearFilters()" class="filter-input" style="cursor: pointer; background: white; font-weight: 600; color: hsl(146 55% 36%);">
+            Clear filters
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects Grid -->
+    <div id="projects-container">
+      <!-- Loading state -->
+      <div id="projects-loading" class="loading-state">
+        <div class="loading-spinner"></div>
+        <p class="text-muted-foreground">Loading projects...</p>
+      </div>
+
+      <!-- Projects will be rendered here -->
+      <div id="projects-grid" class="projects-grid" style="display: none;"></div>
+
+      <!-- Empty state -->
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <i data-lucide="search" style="width: 3rem; height: 3rem; margin: 0 auto 1rem; opacity: 0.3;"></i>
+        <h3 style="font-weight: 700; font-size: 1.25rem; margin-bottom: 0.5rem;">No projects found</h3>
+        <p>Try adjusting your filters or search terms</p>
+      </div>
+
+      <!-- Pagination -->
+      <div id="pagination" class="pagination" style="display: none;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section style="background: white; padding: 5rem 1rem; text-align: center;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to automate your workflow?</h2>
+    <p style="font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.95;" class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+      Get a clear automation plan in 24 hours. No obligation.
+    </p>
+    <a href="https://packdez.com#audit" style="display: inline-block; background: #298E55; color: white; padding: 1rem 2rem; border-radius: 0.5rem; font-weight: 600; text-decoration: none; font-size: 1.125rem; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+      Get your automation plan
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="padding: 4rem 2rem; border-top: 1px solid hsl(220 13% 91%);">
+    <div style="max-width: 1400px; margin: 0 auto;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+            <div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                    <img src="https://packdez.com/assets/logo/packdez-logo-512x512.png" alt="Packdez logo" style="height: 1.75rem; width: 1.75rem;" />
+                    <h3 style="font-size: 1.125rem; font-weight: 700;">Packdez</h3>
+                </div>
+                <p style="font-size: 0.875rem; color: hsl(220 9% 46%); margin-bottom: 1rem;">Stay connected</p>
+                <div style="display: flex; gap: 0.75rem;">
+                    <a href="https://x.com/packdezHQ" target="_blank" rel="noopener noreferrer" style="width: 2.5rem; height: 2.5rem; background: hsl(220 14% 96%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i data-lucide="twitter" style="width: 1rem; height: 1rem;"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/company/packdez/" target="_blank" rel="noopener noreferrer" style="width: 2.5rem; height: 2.5rem; background: hsl(220 14% 96%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i data-lucide="linkedin" style="width: 1rem; height: 1rem;"></i>
+                    </a>
+                    <a href="https://youtube.com/@packdezhqz?si=EXj27rVMq27WlWQp" target="_blank" rel="noopener noreferrer" style="width: 2.5rem; height: 2.5rem; background: hsl(220 14% 96%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i data-lucide="youtube" style="width: 1rem; height: 1rem;"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 style="font-weight: 700; margin-bottom: 1rem; font-size: 0.875rem;">What We Build</h4>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.5rem;"><span style="font-size: 0.875rem; color: hsl(220 9% 46%);">Automated reporting systems</span></li>
+                    <li style="margin-bottom: 0.5rem;"><span style="font-size: 0.875rem; color: hsl(220 9% 46%);">Operations automation</span></li>
+                    <li style="margin-bottom: 0.5rem;"><span style="font-size: 0.875rem; color: hsl(220 9% 46%);">Custom internal tools</span></li>
+                    <li style="margin-bottom: 0.5rem;"><span style="font-size: 0.875rem; color: hsl(220 9% 46%);">API integrations</span></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 style="font-weight: 700; margin-bottom: 1rem; font-size: 0.875rem;">Contact</h4>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.5rem;"><span style="font-size: 0.875rem; color: hsl(220 9% 46%);">packdez.com@gmail.com</span></li>
+                    <li style="margin-bottom: 0.5rem;"><span style="font-size: 0.875rem; color: hsl(220 9% 46%);">Response within 24 hours</span></li>
+                    <li style="margin-bottom: 0.5rem;"><span style="font-size: 0.875rem; color: hsl(220 9% 46%);">Delivery in 7-15 days</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="padding-top: 2rem; border-top: 1px solid hsl(220 13% 91%); text-align: center;">
+            <p style="font-size: 0.875rem; color: hsl(220 9% 46%);">© <span id="year"></span> Packdez</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Enhanced Project Modal - Dribbble Style -->
+<div id="project-modal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
+  <div id="modal-content-wrapper" class="modal-content">
+    <!-- Main Content Column -->
+    <div class="modal-main-column">
+      <!-- Fixed Header -->
+      <div class="modal-header-fixed">
+        <div class="modal-header-left">
+          <img id="modal-contractor-avatar" src="" alt="" class="modal-contractor-avatar" />
+          <h2 id="modal-title" class="modal-title-text"></h2>
+          <div class="modal-engagement-stats">
+            <button id="modal-like-btn" class="modal-like-btn" onclick="event.stopPropagation(); handleModalLike()">
+              <i data-lucide="heart" style="width: 1rem; height: 1rem;"></i>
+              <span id="modal-likes-count">0</span>
+            </button>
+            <div class="modal-engagement-stat">
+              <i data-lucide="eye" style="width: 1rem; height: 1rem;"></i>
+              <span id="modal-views-count">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-header-actions">
+          <button id="modal-prev-btn" class="modal-nav-icon-btn" onclick="event.stopPropagation(); navigateProject(-1)" aria-label="Previous project">
+            <i data-lucide="chevron-left" style="width: 1.25rem; height: 1.25rem;"></i>
+          </button>
+          <button id="modal-next-btn" class="modal-nav-icon-btn" onclick="event.stopPropagation(); navigateProject(1)" aria-label="Next project">
+            <i data-lucide="chevron-right" style="width: 1.25rem; height: 1.25rem;"></i>
+          </button>
+          <button class="modal-enquiry-btn" onclick="event.stopPropagation(); openEnquiryModal()">
+            Send Enquiry
+          </button>
+          <button class="modal-nav-icon-btn" onclick="event.stopPropagation(); closeModal()" aria-label="Close">
+            <i data-lucide="x" style="width: 1.25rem; height: 1.25rem;"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body-content" id="modal-body"></div>
+    </div>
+
+    <!-- Side Column -->
+    <div id="modal-side-column" class="modal-side-column">
+      <div class="side-column-icons">
+        <button class="side-icon-btn" onclick="event.stopPropagation(); toggleSidePanel('feedback')" data-panel="feedback" title="Feedback">
+          <i data-lucide="message-circle" style="width: 1.125rem; height: 1.125rem;"></i>
+          <span id="feedback-badge" class="side-icon-badge" style="display: none;">0</span>
+        </button>
+        <button class="side-icon-btn" onclick="event.stopPropagation(); openShareModal()" data-panel="share" title="Share">
+          <i data-lucide="share-2" style="width: 1.125rem; height: 1.125rem;"></i>
+        </button>
+        <button class="side-icon-btn" onclick="event.stopPropagation(); openAnalyticsModal()" data-panel="analytics" title="Analytics">
+          <i data-lucide="bar-chart-2" style="width: 1.125rem; height: 1.125rem;"></i>
+        </button>
+      </div>
+
+      <!-- Feedback Panel -->
+      <div id="feedback-panel" class="side-panel-content">
+        <div class="side-panel-header">
+          <h3 class="side-panel-title">Feedback</h3>
+          <button class="side-icon-btn" onclick="event.stopPropagation(); closeSidePanel()" style="width: 2rem; height: 2rem;">
+            <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
+          </button>
+        </div>
+        <div class="side-panel-body" id="feedback-content"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Share Modal (Centered) -->
+<div id="share-modal" class="center-modal-overlay" onclick="closeShareModalOnOverlay(event)">
+  <div class="center-modal-content">
+    <div class="center-modal-header">
+      <h3 class="center-modal-title">Share Project</h3>
+      <button class="center-modal-close" onclick="closeShareModal()">
+        <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
+      </button>
+    </div>
+    <div id="share-content"></div>
+  </div>
+</div>
+
+<!-- Analytics Modal (Centered) -->
+<div id="analytics-modal" class="center-modal-overlay" onclick="closeAnalyticsModalOnOverlay(event)">
+  <div class="center-modal-content">
+    <div class="center-modal-header">
+      <h3 class="center-modal-title">Project Analytics</h3>
+      <button class="center-modal-close" onclick="closeAnalyticsModal()">
+        <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
+      </button>
+    </div>
+    <div id="analytics-content"></div>
+  </div>
+</div>
+
+<!-- Enquiry Modal -->
+<div id="enquiry-modal" class="enquiry-modal-overlay" onclick="closeEnquiryModalOnOverlay(event)">
+  <div class="enquiry-modal-content">
+    <h3 class="enquiry-modal-title">Send Enquiry</h3>
+    <form id="enquiry-form" onsubmit="submitEnquiry(event)">
+      <div class="enquiry-form-group">
+        <label class="enquiry-label" for="enquiry-name">Your Name *</label>
+        <input type="text" id="enquiry-name" class="enquiry-input" required />
+      </div>
+      <div class="enquiry-form-group">
+        <label class="enquiry-label" for="enquiry-email">Your Email *</label>
+        <input type="email" id="enquiry-email" class="enquiry-input" required />
+      </div>
+      <div class="enquiry-form-group">
+        <label class="enquiry-label" for="enquiry-message">Message *</label>
+        <textarea id="enquiry-message" class="enquiry-textarea" required></textarea>
+      </div>
+      <div class="enquiry-actions">
+        <button type="button" class="enquiry-cancel-btn" onclick="closeEnquiryModal()">Cancel</button>
+        <button type="submit" class="enquiry-submit-btn">Send Enquiry</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+const supabaseUrl = "https://qachscowqinsefzewhem.supabase.co";
+const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFhY2hzY293cWluc2VmemV3aGVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEwODE5MTgsImV4cCI6MjA4NjY1NzkxOH0.l2NouQy38w6vzuf9D9JORastvK7IMhyG1w_tYx1D5Cc";
+
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+
+  
+// ===================================================================
+// UTILITY FUNCTIONS
+// ===================================================================
+function formatCount(count) {
+  if (count >= 1000) {
+    return (count / 1000).toFixed(1) + 'k';
+  }
+  return count.toString();
+}
+
+function getYouTubeEmbedUrl(url) {
+  if (!url) return null;
+  const videoIdMatch = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+  return videoIdMatch ? `https://www.youtube.com/embed/${videoIdMatch[1]}` : null;
+}
+
+// ===================================================================
+// STATE MANAGEMENT
+// ===================================================================
+let allProjects = [];
+let filteredProjects = [];
+let currentPage = 1;
+const projectsPerPage = 9;
+let currentSlide = 0;
+let sliderInterval = null;
+let currentModalIndex = -1;
+let currentProject = null;
+let activeSidePanel = null;
+
+// Local storage for engagement tracking
+const STORAGE_KEY = 'packdez_project_engagement';
+
+function getEngagement() {
+  const data = localStorage.getItem(STORAGE_KEY);
+  return data ? JSON.parse(data) : {};
+}
+
+function saveEngagement(engagement) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(engagement));
+}
+
+function getProjectEngagement(projectId) {
+  const engagement = getEngagement();
+  return engagement[projectId] || { views: 0, likes: 0 };
+}
+
+function incrementViews(projectId) {
+  const engagement = getEngagement();
+  if (!engagement[projectId]) {
+    engagement[projectId] = { views: 0, likes: 0 };
+  }
+  engagement[projectId].views++;
+  saveEngagement(engagement);
+  return engagement[projectId].views;
+}
+
+function toggleLike(projectId) {
+  const engagement = getEngagement();
+  if (!engagement[projectId]) {
+    engagement[projectId] = { views: 0, likes: 0 };
+  }
+  engagement[projectId].likes++;
+  saveEngagement(engagement);
+  return engagement[projectId].likes;
+}
+
+// ===================================================================
+// SCROLL TO TOP FUNCTIONALITY
+// ===================================================================
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleScrollToTopButton() {
+  const button = document.getElementById('scroll-to-top');
+  if (window.pageYOffset > 400) {
+    button.classList.add('visible');
+  } else {
+    button.classList.remove('visible');
+  }
+}
+
+window.addEventListener('scroll', toggleScrollToTopButton);
+
+// ===================================================================
+// API DATA FETCHING
+// ===================================================================
+
+async function fetchProjects() {
+  try {
+
+    // Fetch projects
+    const { data: projects, error: projectError } = await supabase
+      .from("projects")
+      .select(`
+        *,
+        contractors(*),
+        project_media(*),
+        project_analytics(*),
+        project_feedback(*)
+      `)
+      .eq("status", "published")
+      .order("display_order", { ascending: true });
+
+    if (projectError) throw projectError;
+
+    // Transform into your existing structure
+    allProjects = projects.map(project => {
+
+      const media = project.project_media || [];
+
+      return {
+        ...project,
+        project_id: project.id,
+        project_title: project.title,
+        contractor_name: project.contractors?.name,
+        contractor: {
+          name: project.contractors?.name,
+          bio: project.contractors?.bio
+        },
+        media: {
+          video: media.find(m => m.media_type === "video")?.media_url || null,
+          images: media
+            .filter(m => m.media_type === "image")
+            .sort((a,b) => a.display_order - b.display_order)
+            .map(m => m.media_url)
+        },
+        analytics: project.project_analytics?.[0] || {},
+        comments: project.project_feedback?.map(f => ({
+          author: f.name,
+          text: f.comment
+        })) || []
+      };
+    });
+
+    filteredProjects = [...allProjects];
+
+    populateFilters();
+    renderFeaturedSlider();
+    renderProjects();
+
+  } catch (error) {
+    console.error("Supabase fetch error:", error);
+  }
+}
+
+
+// ===================================================================
+// FEATURED SLIDER
+// ===================================================================
+function renderFeaturedSlider() {
+  const featuredProjects = allProjects
+    .filter(p => String(p.show_on_homepage).toLowerCase() === 'true')
+    .slice(0, 5);
+  
+  if (featuredProjects.length === 0) {
+    document.getElementById('slider-loading').style.display = 'none';
+    return;
+  }
+
+  const sliderTrack = document.getElementById('slider-track');
+  const sliderDots = document.getElementById('slider-dots');
+  
+  sliderTrack.innerHTML = featuredProjects.map(project => {
+    const engagement = getProjectEngagement(project.project_id);
+    const profileImage = project.profile_image || 'https://packdez.com/assets/logo/packdez-logo-512x512.png';
+    const creatorName = project.contractor_name || 'Packdez Team';
+    
+    return `
+    <div class="slider-slide">
+      <div>
+        <span style="display: inline-block; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 600; border-radius: 9999px; background: hsl(146 55% 36% / 0.1); color: hsl(146 55% 36%); margin-bottom: 1rem;">${project.primary_category || 'Automation'}</span>
+        <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2;">
+          ${project.project_title}
+        </h2>
+        <p style="font-size: 1.125rem; color: hsl(220 9% 46%); margin-bottom: 1.5rem; line-height: 1.7;">
+          ${project.short_highlight || project.problem_summary || ''}
+        </p>
+        
+        <!-- Creator info and engagement -->
+        <div class="slider-creator-info">
+          <img src="${profileImage}" alt="${creatorName}" class="slider-creator-avatar" />
+          <div class="slider-creator-details">
+            <div class="slider-creator-name">${creatorName}</div>
+            <div class="slider-engagement-stats">
+              <div class="slider-engagement-stat">
+                <i data-lucide="heart" style="width: 0.875rem; height: 0.875rem;"></i>
+                <span>${formatCount(engagement.likes)}</span>
+              </div>
+              <div class="slider-engagement-stat">
+                <i data-lucide="eye" style="width: 0.875rem; height: 0.875rem;"></i>
+                <span>${formatCount(engagement.views)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        ${project.industry ? `<p style="font-size: 0.9375rem; color: hsl(220 9% 46%); margin-top: 1rem;"><strong>Industry:</strong> ${project.industry}</p>` : ''}
+        <button onclick="openModal('${project.project_id}')" class="btn btn-primary" style="margin-top: 1.5rem;">
+          View system details
+        </button>
+      </div>
+      <div>
+        <img 
+          src="${project.thumbnail_image_url}" 
+          alt="${project.image_alt_text || project.project_title}"
+          class="slider-image"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  `}).join('');
+
+  sliderDots.innerHTML = featuredProjects.map((_, index) => `
+    <div class="slider-dot ${index === 0 ? 'active' : ''}" onclick="goToSlide(${index})"></div>
+  `).join('');
+
+  document.getElementById('slider-loading').style.display = 'none';
+  document.getElementById('featured-slider').style.display = 'block';
+
+  startSlider(featuredProjects.length);
+  lucide.createIcons();
+}
+
+function startSlider(totalSlides) {
+  if (sliderInterval) clearInterval(sliderInterval);
+  sliderInterval = setInterval(() => {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateSlider();
+  }, 6000);
+}
+
+function updateSlider() {
+  const sliderTrack = document.getElementById('slider-track');
+  sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+  
+  document.querySelectorAll('.slider-dot').forEach((dot, index) => {
+    dot.classList.toggle('active', index === currentSlide);
+  });
+}
+
+function goToSlide(index) {
+  currentSlide = index;
+  updateSlider();
+  if (sliderInterval) clearInterval(sliderInterval);
+  startSlider(document.querySelectorAll('.slider-slide').length);
+}
+
+function nextSlide() {
+  const totalSlides = document.querySelectorAll('.slider-slide').length;
+  currentSlide = (currentSlide + 1) % totalSlides;
+  updateSlider();
+  if (sliderInterval) clearInterval(sliderInterval);
+  startSlider(totalSlides);
+}
+
+function previousSlide() {
+  const totalSlides = document.querySelectorAll('.slider-slide').length;
+  currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+  updateSlider();
+  if (sliderInterval) clearInterval(sliderInterval);
+  startSlider(totalSlides);
+}
+
+// ===================================================================
+// FILTERS
+// ===================================================================
+function populateFilters() {
+  const categories = [...new Set(allProjects.map(p => p.primary_category).filter(Boolean))];
+  const industries = [...new Set(allProjects.map(p => p.industry).filter(Boolean))];
+
+  const categoryFilter = document.getElementById('category-filter');
+  const industryFilter = document.getElementById('industry-filter');
+
+  categories.forEach(cat => {
+    const option = document.createElement('option');
+    option.value = cat;
+    option.textContent = cat;
+    categoryFilter.appendChild(option);
+  });
+
+  industries.forEach(ind => {
+    const option = document.createElement('option');
+    option.value = ind;
+    option.textContent = ind;
+    industryFilter.appendChild(option);
+  });
+}
+
+function applyFilters() {
+  const searchTerm = document.getElementById('search-input').value.toLowerCase();
+  const category = document.getElementById('category-filter').value;
+  const industry = document.getElementById('industry-filter').value;
+
+  filteredProjects = allProjects.filter(project => {
+    const matchesSearch = !searchTerm || 
+      project.project_title.toLowerCase().includes(searchTerm) ||
+      (project.problem_summary && project.problem_summary.toLowerCase().includes(searchTerm)) ||
+      (project.short_highlight && project.short_highlight.toLowerCase().includes(searchTerm));
+    
+    const matchesCategory = !category || project.primary_category === category;
+    const matchesIndustry = !industry || project.industry === industry;
+
+    return matchesSearch && matchesCategory && matchesIndustry;
+  });
+
+  currentPage = 1;
+  renderProjects();
+}
+
+function clearFilters() {
+  document.getElementById('search-input').value = '';
+  document.getElementById('category-filter').value = '';
+  document.getElementById('industry-filter').value = '';
+  applyFilters();
+}
+
+// ===================================================================
+// PROJECT GRID RENDERING - DRIBBBLE STYLE
+// ===================================================================
+function renderProjects() {
+  const grid = document.getElementById('projects-grid');
+  const loading = document.getElementById('projects-loading');
+  const emptyState = document.getElementById('empty-state');
+  const pagination = document.getElementById('pagination');
+
+  loading.style.display = 'none';
+
+  if (filteredProjects.length === 0) {
+    grid.style.display = 'none';
+    emptyState.style.display = 'block';
+    pagination.style.display = 'none';
+    lucide.createIcons();
+    return;
+  }
+
+  emptyState.style.display = 'none';
+  grid.style.display = 'grid';
+
+  const startIndex = (currentPage - 1) * projectsPerPage;
+  const endIndex = startIndex + projectsPerPage;
+  const projectsToShow = filteredProjects.slice(startIndex, endIndex);
+
+  grid.innerHTML = projectsToShow.map(project => {
+    const engagement = getProjectEngagement(project.project_id);
+    const profileImage = project.profile_image || 'https://packdez.com/assets/logo/packdez-logo-512x512.png';
+    const creatorName = project.contractor_name || 'Packdez Team';
+    
+    return `
+    <div class="project-card" onclick="openModal('${project.project_id}')">
+      <div class="project-card-image-wrapper">
+        <img 
+          src="${project.thumbnail_image_url}" 
+          alt="${project.image_alt_text || project.project_title}"
+          class="project-card-image"
+          loading="lazy"
+        />
+        
+        <!-- Desktop overlay -->
+        <div class="project-card-overlay">
+          <div class="overlay-top">
+            <div class="overlay-action" onclick="event.stopPropagation(); handleLike('${project.project_id}')">
+              <i data-lucide="heart" style="width: 0.875rem; height: 0.875rem;"></i>
+            </div>
+          </div>
+          <div class="overlay-bottom">
+            <div class="overlay-title">${project.project_title}</div>
+            <div class="overlay-stats">
+              <div class="overlay-stat">
+                <i data-lucide="heart" style="width: 0.875rem; height: 0.875rem;"></i>
+                <span id="likes-overlay-${project.project_id}">${formatCount(engagement.likes)}</span>
+              </div>
+              <div class="overlay-stat">
+                <i data-lucide="eye" style="width: 0.875rem; height: 0.875rem;"></i>
+                <span id="views-overlay-${project.project_id}">${formatCount(engagement.views)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Card Footer -->
+      <div class="card-footer">
+        <div class="card-creator">
+          <img src="${profileImage}" alt="${creatorName}" class="creator-avatar" />
+          <span class="creator-name">${creatorName}</span>
+        </div>
+        <div class="card-stats">
+          <button class="like-btn" onclick="event.stopPropagation(); handleLike('${project.project_id}')}" id="like-btn-${project.project_id}">
+            <i data-lucide="heart" style="width: 0.875rem; height: 0.875rem;"></i>
+            <span id="likes-${project.project_id}">${formatCount(engagement.likes)}</span>
+          </button>
+          <div class="card-stat">
+            <i data-lucide="eye"></i>
+            <span id="views-${project.project_id}">${formatCount(engagement.views)}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `}).join('');
+
+  renderPagination();
+  lucide.createIcons();
+}
+
+function handleLike(projectId) {
+  const newLikes = toggleLike(projectId);
+  
+  // Update all displays
+  const likesElement = document.getElementById(`likes-${projectId}`);
+  const likesOverlay = document.getElementById(`likes-overlay-${projectId}`);
+  const likeBtn = document.getElementById(`like-btn-${projectId}`);
+  
+  if (likesElement) likesElement.textContent = formatCount(newLikes);
+  if (likesOverlay) likesOverlay.textContent = formatCount(newLikes);
+  
+  // Add animation
+  if (likeBtn) {
+    likeBtn.classList.add('animating', 'liked');
+    setTimeout(() => likeBtn.classList.remove('animating'), 400);
+  }
+  
+  // Update modal if open
+  if (currentProject && currentProject.project_id === projectId) {
+    updateModalEngagement();
+  }
+  
+  lucide.createIcons();
+}
+
+function handleModalLike() {
+  if (!currentProject) return;
+  
+  const newLikes = toggleLike(currentProject.project_id);
+  updateModalEngagement();
+  
+  // Update grid displays
+  const likesElement = document.getElementById(`likes-${currentProject.project_id}`);
+  const likesOverlay = document.getElementById(`likes-overlay-${currentProject.project_id}`);
+  
+  if (likesElement) likesElement.textContent = formatCount(newLikes);
+  if (likesOverlay) likesOverlay.textContent = formatCount(newLikes);
+  
+  lucide.createIcons();
+}
+
+function updateModalEngagement() {
+  if (!currentProject) return;
+  
+  const engagement = getProjectEngagement(currentProject.project_id);
+  const analytics = currentProject.analytics || {};
+  
+  const totalViews = (analytics.total_views || 0) + engagement.views;
+  const totalLikes = (analytics.total_likes || 0) + engagement.likes;
+  
+  const modalLikesCount = document.getElementById('modal-likes-count');
+  const modalViewsCount = document.getElementById('modal-views-count');
+  const modalLikeBtn = document.getElementById('modal-like-btn');
+  
+  if (modalLikesCount) modalLikesCount.textContent = formatCount(totalLikes);
+  if (modalViewsCount) modalViewsCount.textContent = formatCount(totalViews);
+  
+  if (modalLikeBtn && engagement.likes > 0) {
+    modalLikeBtn.classList.add('liked');
+  }
+  
+  lucide.createIcons();
+}
+
+function renderPagination() {
+  const pagination = document.getElementById('pagination');
+  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+
+  if (totalPages <= 1) {
+    pagination.style.display = 'none';
+    return;
+  }
+
+  pagination.style.display = 'flex';
+
+  let paginationHTML = `
+    <button class="pagination-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+      Previous
+    </button>
+  `;
+
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+      paginationHTML += `
+        <button class="pagination-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">
+          ${i}
+        </button>
+      `;
+    } else if (i === currentPage - 2 || i === currentPage + 2) {
+      paginationHTML += `<span style="padding: 0.5rem;">...</span>`;
+    }
+  }
+
+  paginationHTML += `
+    <button class="pagination-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+      Next
+    </button>
+  `;
+
+  pagination.innerHTML = paginationHTML;
+}
+
+function changePage(page) {
+  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+  if (page < 1 || page > totalPages) return;
+  currentPage = page;
+  renderProjects();
+  
+  // Smooth scroll to filters section with offset for fixed nav
+  const filtersSection = document.getElementById('filters-section');
+  if (filtersSection) {
+    const yOffset = -80;
+    const y = filtersSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+}
+
+// ===================================================================
+// MODAL - ENHANCED DRIBBBLE STYLE
+// ===================================================================
+function openModal(projectId) {
+  const project = allProjects.find(p => p.project_id === projectId);
+  if (!project) return;
+
+  currentProject = project;
+
+  // Increment view count
+  const newViews = incrementViews(projectId);
+  
+  // Update view counts in grid
+  const viewsElement = document.getElementById(`views-${projectId}`);
+  const viewsOverlay = document.getElementById(`views-overlay-${projectId}`);
+  if (viewsElement) viewsElement.textContent = formatCount(newViews);
+  if (viewsOverlay) viewsOverlay.textContent = formatCount(newViews);
+
+  currentModalIndex = filteredProjects.findIndex(p => p.project_id === projectId);
+
+  const modal = document.getElementById('project-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalBody = document.getElementById('modal-body');
+  const contractorAvatar = document.getElementById('modal-contractor-avatar');
+
+  // Set header
+  const profileImage = project.profile_image || 'https://packdez.com/assets/logo/packdez-logo-512x512.png';
+  contractorAvatar.src = profileImage;
+  contractorAvatar.alt = project.contractor_name || 'Packdez Team';
+  modalTitle.textContent = project.project_title;
+  
+  // Update engagement stats in header
+  updateModalEngagement();
+
+  // Build modal content
+  let content = '';
+
+  // Featured Media Section with Vertical Gallery
+  content += '<div class="featured-media-section">';
+  
+  const videoUrl = project.media?.video;
+  const embedUrl = getYouTubeEmbedUrl(videoUrl);
+  
+  // Media Thumbnails (Vertical)
+  const mediaItems = [];
+  if (project.thumbnail_image_url) {
+    mediaItems.push({ type: 'image', url: project.thumbnail_image_url });
+  }
+  if (project.media?.images && Array.isArray(project.media.images)) {
+    project.media.images.forEach(img => {
+      if (img) mediaItems.push({ type: 'image', url: img });
+    });
+  }
+  if (videoUrl) {
+    mediaItems.push({ type: 'video', url: videoUrl });
+  }
+
+  if (mediaItems.length > 1) {
+    content += '<div class="media-thumbnails-vertical">';
+    mediaItems.forEach((media, index) => {
+      const thumbUrl = media.type === 'image' ? media.url : project.thumbnail_image_url;
+      content += `
+        <div class="media-thumbnail ${index === 0 ? 'active' : ''}" onclick="switchFeaturedMedia('${media.type}', '${media.url}', this)">
+          <img src="${thumbUrl}" alt="Media ${index + 1}" />
+        </div>
+      `;
+    });
+    content += '</div>';
+  }
+  
+  // Featured Media Container
+  content += '<div>';
+  if (embedUrl) {
+    content += `
+      <div class="featured-media-container" id="featured-media">
+        <iframe src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    `;
+  } else {
+    content += `
+      <div class="featured-media-container" id="featured-media">
+        <img src="${project.thumbnail_image_url}" alt="${project.image_alt_text || project.project_title}" />
+      </div>
+    `;
+  }
+  content += '</div>';
+  
+  content += '</div>';
+
+  // Project Details Grid
+  content += '<div class="project-details-grid">';
+  if (project.primary_category) {
+    content += `
+      <div class="detail-item">
+        <div class="detail-label">Category</div>
+        <div class="detail-value">${project.primary_category}</div>
+      </div>
+    `;
+  }
+  if (project.industry) {
+    content += `
+      <div class="detail-item">
+        <div class="detail-label">Industry</div>
+        <div class="detail-value">${project.industry}</div>
+      </div>
+    `;
+  }
+  if (project.team_size_range) {
+    content += `
+      <div class="detail-item">
+        <div class="detail-label">Team Size</div>
+        <div class="detail-value">${project.team_size_range}</div>
+      </div>
+    `;
+  }
+  if (project.client_context) {
+    content += `
+      <div class="detail-item">
+        <div class="detail-label">Client</div>
+        <div class="detail-value">${project.client_context}</div>
+      </div>
+    `;
+  }
+  content += '</div>';
+
+  // Problem Section
+  if (project.problem_details || project.problem_summary) {
+    content += `
+      <div class="content-section">
+        <h3 class="section-title">The Problem</h3>
+        <p class="section-content">${project.problem_details || project.problem_summary}</p>
+      </div>
+    `;
+  }
+
+  // Solution Section
+  if (project.system_overview) {
+    content += `
+      <div class="content-section">
+        <h3 class="section-title">The Solution</h3>
+        <p class="section-content">${project.system_overview}</p>
+      </div>
+    `;
+  }
+
+  // Tools Section
+  if (project.tools_used) {
+    const tools = project.tools_used.split(',').map(t => t.trim()).filter(Boolean);
+    if (tools.length > 0) {
+      content += `
+        <div class="content-section">
+          <h3 class="section-title">Tools & Integrations</h3>
+          <div class="tool-tags">
+            ${tools.map(tool => `<span class="tool-tag">${tool}</span>`).join('')}
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  // Outcomes Section
+  if (project.primary_outcome || project.secondary_outcome) {
+    content += `
+      <div class="content-section">
+        <h3 class="section-title">Results</h3>
+        <div class="outcome-metrics">
+    `;
+    
+    if (project.primary_outcome) {
+      content += `
+        <div class="outcome-metric">
+          <div class="outcome-metric-value">${project.primary_outcome}</div>
+          <div class="outcome-metric-label">${project.metric_type || 'Primary outcome'}</div>
+        </div>
+      `;
+    }
+    
+    if (project.secondary_outcome) {
+      content += `
+        <div class="outcome-metric">
+          <div class="outcome-metric-value">${project.secondary_outcome}</div>
+          <div class="outcome-metric-label">Secondary outcome</div>
+        </div>
+      `;
+    }
+    
+    content += '</div></div>';
+  }
+
+  // Testimonial
+  if (project.testimonial_quote) {
+    content += `
+      <div class="testimonial-box">
+        <p style="font-style: italic; line-height: 1.7; margin-bottom: 1rem; color: hsl(220 20% 20%); font-size: 1.125rem;">
+          "${project.testimonial_quote}"
+        </p>
+        ${project.testimonial_author ? `
+          <p style="font-weight: 700; font-size: 0.9375rem;">
+            — ${project.testimonial_author}
+            ${project.testimonial_source ? `<span style="font-weight: 400; color: hsl(220 9% 46%);">, ${project.testimonial_source}</span>` : ''}
+          </p>
+        ` : ''}
+      </div>
+    `;
+  }
+
+  // Contractor Divider
+  content += `
+    <div class="contractor-divider">
+      <img src="${profileImage}" alt="${project.contractor_name || 'Packdez Team'}" class="contractor-avatar-large" />
+    </div>
+  `;
+
+  // Contractor Info
+  const contractor = project.contractor || {};
+  content += `
+    <div class="contractor-info-box">
+
+<h3 class="contractor-name-large">
+  <a
+    href="contractor.html?contractor=${project.contractor_id}"
+    onclick="event.stopPropagation()"
+    style="text-decoration:none; color:inherit;"
+  >
+    ${contractor.name || project.contractor_name || 'Packdez Team'}
+  </a>
+</h3>
+
+      <p class="contractor-bio">${contractor.bio || 'Specialist in automation and workflow optimization'}</p>
+      <button class="btn btn-primary" onclick="event.stopPropagation(); openEnquiryModal()">
+        Send Enquiry
+      </button>
+    </div>
+  `;
+
+  // Related Projects by Same Contractor
+  const relatedProjects = allProjects.filter(p => 
+    p.contractor_id === project.contractor_id && 
+    p.project_id !== project.project_id &&
+    p.status === 'published'
+  ).slice(0, 4);
+
+  if (relatedProjects.length > 0) {
+    content += `
+      <div class="content-section">
+        <div class="related-projects-header">
+          <h3 class="section-title" style="margin-bottom: 0;">More Projects by ${contractor.name || project.contractor_name || 'This Contractor'}</h3>
+          <a
+              href="contractor.html?contractor=${project.contractor_id}"
+              class="view-all-link"
+              onclick="event.stopPropagation()"
+            >
+              View All →
+            </a>
+        </div>
+        <div class="related-projects-grid">
+          ${relatedProjects.map(rp => {
+            const rpEngagement = getProjectEngagement(rp.project_id);
+            return `
+            <div class="related-project-card" onclick="event.stopPropagation(); openModal('${rp.project_id}')">
+              <img src="${rp.thumbnail_image_url}" alt="${rp.project_title}" class="related-project-image" />
+              <div class="related-project-overlay">
+                <div class="related-project-title">${rp.project_title}</div>
+                <div class="related-project-stats">
+                  <div class="related-project-stat">
+                    <i data-lucide="heart" style="width: 0.75rem; height: 0.75rem;"></i>
+                    <span>${formatCount(rpEngagement.likes)}</span>
+                  </div>
+                  <div class="related-project-stat">
+                    <i data-lucide="eye" style="width: 0.75rem; height: 0.75rem;"></i>
+                    <span>${formatCount(rpEngagement.views)}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `}).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  modalBody.innerHTML = content;
+  updateModalNavigation();
+  updateFeedbackBadge();
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  
+  // Reset side panel
+  closeSidePanel();
+  
+  lucide.createIcons();
+}
+
+function switchFeaturedMedia(type, url, element) {
+  const featuredContainer = document.getElementById('featured-media');
+  
+  if (type === 'video') {
+    const embedUrl = getYouTubeEmbedUrl(url);
+    if (embedUrl) {
+      featuredContainer.innerHTML = `<iframe src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    }
+  } else {
+    featuredContainer.innerHTML = `<img src="${url}" alt="Project media" />`;
+  }
+
+  // Update active thumbnail
+  document.querySelectorAll('.media-thumbnail').forEach(thumb => thumb.classList.remove('active'));
+  element.classList.add('active');
+}
+
+function closeModal() {
+  const modal = document.getElementById('project-modal');
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+  currentModalIndex = -1;
+  currentProject = null;
+  closeSidePanel();
+}
+
+function closeModalOnOverlay(event) {
+  if (event.target.id === 'project-modal') {
+    closeModal();
+  }
+}
+
+function updateModalNavigation() {
+  const prevBtn = document.getElementById('modal-prev-btn');
+  const nextBtn = document.getElementById('modal-next-btn');
+
+  prevBtn.disabled = currentModalIndex <= 0;
+  nextBtn.disabled = currentModalIndex >= filteredProjects.length - 1;
+}
+
+function navigateProject(direction) {
+  const newIndex = currentModalIndex + direction;
+  if (newIndex < 0 || newIndex >= filteredProjects.length) return;
+
+  const project = filteredProjects[newIndex];
+  openModal(project.project_id);
+}
+
+// ===================================================================
+// SIDE PANEL FUNCTIONS
+// ===================================================================
+function toggleSidePanel(panelName) {
+  const modalContent = document.getElementById('modal-content-wrapper');
+  const panels = ['feedback'];
+  
+  // Close if same panel is clicked
+  if (activeSidePanel === panelName) {
+    closeSidePanel();
+    return;
+  }
+
+  // Hide all panels
+  panels.forEach(p => {
+    document.getElementById(`${p}-panel`).classList.remove('active');
+    const btn = document.querySelector(`[data-panel="${p}"]`);
+    if (btn) btn.classList.remove('active');
+  });
+
+  // Show selected panel
+  document.getElementById(`${panelName}-panel`).classList.add('active');
+  document.querySelector(`[data-panel="${panelName}"]`).classList.add('active');
+  modalContent.classList.add('side-expanded');
+  activeSidePanel = panelName;
+
+  // Load panel content
+  if (panelName === 'feedback') {
+    loadFeedbackPanel();
+  }
+
+  lucide.createIcons();
+}
+
+function closeSidePanel() {
+  const modalContent = document.getElementById('modal-content-wrapper');
+  const panels = ['feedback'];
+  
+  panels.forEach(p => {
+    document.getElementById(`${p}-panel`).classList.remove('active');
+    const btn = document.querySelector(`[data-panel="${p}"]`);
+    if (btn) btn.classList.remove('active');
+  });
+  
+  modalContent.classList.remove('side-expanded');
+  activeSidePanel = null;
+}
+
+function updateFeedbackBadge() {
+  if (!currentProject) return;
+  
+  const comments = currentProject.comments || [];
+  const badge = document.getElementById('feedback-badge');
+  
+  if (comments.length > 0) {
+    badge.textContent = comments.length;
+    badge.style.display = 'block';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+function loadFeedbackPanel() {
+  if (!currentProject) return;
+  
+  const feedbackContent = document.getElementById('feedback-content');
+  const comments = currentProject.comments || [];
+  
+  let html = '';
+  
+  if (comments.length === 0) {
+    html += '<p style="color: hsl(220 9% 46%); text-align: center; padding: 2rem 0;">No feedback yet. Be the first to comment!</p>';
+  } else {
+    comments.forEach(comment => {
+      html += `
+        <div class="comment-item">
+          <div class="comment-author">${comment.author || 'Anonymous'}</div>
+          <div class="comment-text">${comment.text}</div>
+        </div>
+      `;
+    });
+  }
+  
+  html += `
+    <div class="comment-form">
+      <textarea class="comment-textarea" placeholder="Leave your feedback..." id="feedback-textarea"></textarea>
+      <button class="comment-submit-btn" onclick="submitFeedback()">Post Feedback</button>
+    </div>
+  `;
+  
+  feedbackContent.innerHTML = html;
+}
+
+function submitFeedback() {
+  const textarea = document.getElementById('feedback-textarea');
+  const text = textarea.value.trim();
+  
+  if (!text) return;
+  
+  // Here you would send to your backend
+  alert('Feedback submitted! (This would be saved to your sheet)');
+  textarea.value = '';
+  loadFeedbackPanel();
+  updateFeedbackBadge();
+}
+
+// ===================================================================
+// SHARE MODAL
+// ===================================================================
+function openShareModal() {
+  if (!currentProject) return;
+  
+  const shareModal = document.getElementById('share-modal');
+  const shareContent = document.getElementById('share-content');
+  const projectUrl = `${window.location.origin}${window.location.pathname}?project=${currentProject.project_id}`;
+  
+  const html = `
+    <div class="share-options">
+      <button class="share-btn" onclick="shareToLinkedIn()">
+        <i data-lucide="linkedin" style="width: 1.125rem; height: 1.125rem;"></i>
+        Share on LinkedIn
+      </button>
+      <button class="share-btn" onclick="shareToTwitter()">
+        <i data-lucide="twitter" style="width: 1.125rem; height: 1.125rem;"></i>
+        Share on X (Twitter)
+      </button>
+      <div style="margin-top: 1rem;">
+        <label style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">Project Link</label>
+        <input type="text" class="share-link-input" value="${projectUrl}" readonly onclick="this.select()" />
+        <button class="comment-submit-btn" onclick="copyProjectLink()" style="margin-top: 0.5rem;">
+          Copy Link
+        </button>
+      </div>
+    </div>
+  `;
+  
+  shareContent.innerHTML = html;
+  shareModal.classList.add('active');
+  lucide.createIcons();
+}
+
+function closeShareModal() {
+  document.getElementById('share-modal').classList.remove('active');
+}
+
+function closeShareModalOnOverlay(event) {
+  if (event.target.id === 'share-modal') {
+    closeShareModal();
+  }
+}
+
+function shareToLinkedIn() {
+  if (!currentProject) return;
+  const url = encodeURIComponent(`${window.location.origin}${window.location.pathname}?project=${currentProject.project_id}`);
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+function shareToTwitter() {
+  if (!currentProject) return;
+  const url = encodeURIComponent(`${window.location.origin}${window.location.pathname}?project=${currentProject.project_id}`);
+  const text = encodeURIComponent(`Check out this project: ${currentProject.project_title}`);
+  window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+}
+
+function copyProjectLink() {
+  if (!currentProject) return;
+  const url = `${window.location.origin}${window.location.pathname}?project=${currentProject.project_id}`;
+  navigator.clipboard.writeText(url).then(() => {
+    alert('Link copied to clipboard!');
+  });
+}
+
+// ===================================================================
+// ANALYTICS MODAL
+// ===================================================================
+function openAnalyticsModal() {
+  if (!currentProject) return;
+  
+  const analyticsModal = document.getElementById('analytics-modal');
+  const analyticsContent = document.getElementById('analytics-content');
+  const engagement = getProjectEngagement(currentProject.project_id);
+  const analytics = currentProject.analytics || {};
+  
+  const totalViews = (analytics.total_views || 0) + engagement.views;
+  const totalLikes = (analytics.total_likes || 0) + engagement.likes;
+  const totalComments = (currentProject.comments || []).length;
+  
+  const html = `
+    <div class="analytics-grid">
+      <div class="analytics-item">
+        <div class="analytics-value">${formatCount(totalViews)}</div>
+        <div class="analytics-label">Total Views</div>
+      </div>
+      <div class="analytics-item">
+        <div class="analytics-value">${formatCount(totalLikes)}</div>
+        <div class="analytics-label">Total Likes</div>
+      </div>
+      <div class="analytics-item">
+        <div class="analytics-value">${totalComments}</div>
+        <div class="analytics-label">Comments</div>
+      </div>
+    </div>
+  `;
+  
+  analyticsContent.innerHTML = html;
+  analyticsModal.classList.add('active');
+}
+
+function closeAnalyticsModal() {
+  document.getElementById('analytics-modal').classList.remove('active');
+}
+
+function closeAnalyticsModalOnOverlay(event) {
+  if (event.target.id === 'analytics-modal') {
+    closeAnalyticsModal();
+  }
+}
+
+// ===================================================================
+// ENQUIRY MODAL
+// ===================================================================
+function openEnquiryModal() {
+  document.getElementById('enquiry-modal').classList.add('active');
+}
+
+function closeEnquiryModal() {
+  document.getElementById('enquiry-modal').classList.remove('active');
+  document.getElementById('enquiry-form').reset();
+}
+
+function closeEnquiryModalOnOverlay(event) {
+  if (event.target.id === 'enquiry-modal') {
+    closeEnquiryModal();
+  }
+}
+
+function submitEnquiry(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('enquiry-name').value;
+  const email = document.getElementById('enquiry-email').value;
+  const message = document.getElementById('enquiry-message').value;
+  
+  // Here you would send to your backend/Google Sheets
+  console.log('Enquiry submitted:', { name, email, message, project: currentProject?.project_id });
+  
+  alert('Thank you for your enquiry! We will get back to you soon.');
+  closeEnquiryModal();
+}
+
+// ===================================================================
+// MOBILE MENU
+// ===================================================================
+function toggleMobileMenu() {
+  document.getElementById('mobile-menu').classList.add('active');
+  document.getElementById('mobile-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('active');
+  document.getElementById('mobile-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// ===================================================================
+// FADE-UP ANIMATIONS
+// ===================================================================
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ===================================================================
+// KEYBOARD SHORTCUTS
+// ===================================================================
+document.addEventListener('keydown', (e) => {
+  const modalOpen = document.getElementById('project-modal').classList.contains('active');
+  const enquiryModalOpen = document.getElementById('enquiry-modal').classList.contains('active');
+  const shareModalOpen = document.getElementById('share-modal').classList.contains('active');
+  const analyticsModalOpen = document.getElementById('analytics-modal').classList.contains('active');
+  
+  if (e.key === 'Escape') {
+    if (enquiryModalOpen) {
+      closeEnquiryModal();
+    } else if (shareModalOpen) {
+      closeShareModal();
+    } else if (analyticsModalOpen) {
+      closeAnalyticsModal();
+    } else if (activeSidePanel) {
+      closeSidePanel();
+    } else if (modalOpen) {
+      closeModal();
+    }
+  }
+  
+  if (modalOpen && !enquiryModalOpen && !shareModalOpen && !analyticsModalOpen && !activeSidePanel) {
+    if (e.key === 'ArrowLeft') {
+      navigateProject(-1);
+    } else if (e.key === 'ArrowRight') {
+      navigateProject(1);
+    }
+  }
+});
+
+// ===================================================================
+// URL PARAMETERS - Open project from URL
+// ===================================================================
+function checkUrlParams() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const projectId = urlParams.get('project');
+  if (projectId) {
+    setTimeout(() => openModal(projectId), 500);
+  }
+}
+
+// ===================================================================
+// INITIALIZATION
+// ===================================================================
+window.addEventListener('load', () => {
+  window.scrollTo(0, 0);
+  checkUrlParams();
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+fetchProjects();
+lucide.createIcons();
+</script>
+
+</body>
+</html>
