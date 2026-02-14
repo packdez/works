@@ -2002,7 +2002,7 @@ async function fetchProjects() {
 // ===================================================================
 function renderFeaturedSlider() {
   const featuredProjects = allProjects
-    .filter(p => String(p.show_on_homepage).toLowerCase() === 'true')
+    .filter(p => p.show_on_homepage === true)
     .slice(0, 5);
   
   if (featuredProjects.length === 0) {
@@ -2238,7 +2238,7 @@ function renderProjects() {
           <span class="creator-name">${creatorName}</span>
         </div>
         <div class="card-stats">
-          <button class="like-btn" onclick="event.stopPropagation(); handleLike('${project.project_id}')}" id="like-btn-${project.project_id}">
+          <button class="like-btn" onclick="event.stopPropagation(); handleLike('${project.project_id}')" id="like-btn-${project.project_id}">
             <i data-lucide="heart" style="width: 0.875rem; height: 0.875rem;"></i>
             <span id="likes-${project.project_id}">${formatCount(engagement.likes)}</span>
           </button>
